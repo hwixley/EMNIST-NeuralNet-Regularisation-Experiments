@@ -673,7 +673,7 @@ class DropoutLayer(StochasticLayer):
         Returns:
             outputs: Array of layer outputs of shape (batch_size, output_dim).
         """
-        # Raise NotImplementedError
+        # raise NotImplementedError
         if stochastic:
             mask_shape = (1,) + inputs.shape[1:] if self.share_across_batch else inputs.shape
             self._mask = (self.rng.uniform(size=mask_shape) < self.incl_prob)
@@ -699,6 +699,7 @@ class DropoutLayer(StochasticLayer):
             Array of gradients with respect to the layer inputs of shape
             (batch_size, input_dim).
         """
+        # raise NotImplementedError
         return grads_wrt_outputs * self._mask
 
     def __repr__(self):
