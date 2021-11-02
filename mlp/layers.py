@@ -417,7 +417,15 @@ class LeakyReluLayer(Layer):
         For inputs `x` and outputs `y` this corresponds to `y = ..., else`.
         """
 
-        raise NotImplementedError
+        #raise NotImplementedError        
+        positive_inputs = np.maximum(inputs, 0.)
+
+        negative_inputs = inputs
+        negative_inputs[negative_inputs>0] = 0.
+        negative_inputs = negative_inputs * self.alpha
+
+        outputs = positive_inputs + negative_inputs
+        return outputs
 
     def bprop(self, inputs, outputs, grads_wrt_outputs):
         """Back propagates gradients through a layer.
@@ -425,7 +433,11 @@ class LeakyReluLayer(Layer):
         Given gradients with respect to the outputs of the layer calculates the
         gradients with respect to the layer inputs.
         """
-        raise NotImplementedError
+        #raise NotImplementedError
+        positive_gradients = (outputs > 0) * grads_wrt_outputs
+        negative_gradients = self.alpha * (outputs < 0) * grads_wrt_outputs
+        gradients = positive_gradients + negative_gradients
+        return gradients
 
     def __repr__(self):
         return 'LeakyReluLayer'
@@ -661,7 +673,13 @@ class DropoutLayer(StochasticLayer):
         Returns:
             outputs: Array of layer outputs of shape (batch_size, output_dim).
         """
-        raise NotImplementedError
+        # Raise NotImplementedError
+        if stochastic:
+            mask_shape = (1,) + inputs.shape[1:] if self.share_across_batch else inputs.shape
+            self._mask = (self.rng.uniform(size=mask_shape) < self.incl_prob)
+            return inputs * self._mask
+        else:
+            return inputs * self.incl_prob
 
     def bprop(self, inputs, outputs, grads_wrt_outputs):
         """Back propagates gradients through a layer.
@@ -681,7 +699,7 @@ class DropoutLayer(StochasticLayer):
             Array of gradients with respect to the layer inputs of shape
             (batch_size, input_dim).
         """
-        raise NotImplementedError
+        return grads_wrt_outputs * self._mask
 
     def __repr__(self):
         return 'DropoutLayer(incl_prob={0:.1f})'.format(self.incl_prob)
