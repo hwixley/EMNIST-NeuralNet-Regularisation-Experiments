@@ -1,0 +1,1 @@
+{'error(train)': 0, 'acc(train)': 1, 'error(valid)': 2, 'acc(valid)': 3}
