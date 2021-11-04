@@ -1,0 +1,8 @@
+Finished model accuracy
+Train acc: 0.9161799999999959
+Val acc: 0.8410759493670883
+
+
+Finished model error
+Train err: 0.23751071573212096
+Val err: 0.5205550463692913
