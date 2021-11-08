@@ -80,7 +80,7 @@ for penalty_layer, params_flag in zip(
     if params_flag:
         reg_output_dict['{}_{}'.format(penalty_layer.__name__, 'grads_wrt_outputs')] = outputs[2]
 
-np.save(os.path.join(os.environ['MLP_DATA_DIR'], '{}_regularization_test_pack.npy'.format(seed)), reg_output_dict)
+np.save(os.path.join(os.environ['MLP_CWK1_DATA_DIR'], '{}_regularization_test_pack.npy'.format(seed)), reg_output_dict)
 
 test_data = np.load(os.path.join(os.environ['MLP_DATA_DIR'], '{}_regularization_test_pack.npy'.format(seed)), allow_pickle=True)
 
