@@ -82,7 +82,7 @@ for penalty_layer, params_flag in zip(
 
 np.save(os.path.join(os.environ['MLP_CWK1_DATA_DIR'], '{}_regularization_test_pack.npy'.format(seed)), reg_output_dict)
 
-test_data = np.load(os.path.join(os.environ['MLP_DATA_DIR'], '{}_regularization_test_pack.npy'.format(seed)), allow_pickle=True)
+test_data = np.load(os.path.join(os.environ['MLP_CWK1_DATA_DIR'], '{}_regularization_test_pack.npy'.format(seed)), allow_pickle=True)
 
 for key, value in test_data.item().items():
     print(key, value)
