@@ -1,3 +1,3 @@
 # EMNIST Dataset ML Modelling
 
-Using CNNs with Dropout layers, Regularized layers, or Maxout Networks to help alleviate the vanishing/exploding gradient problem.
+Experiments modelling the EMNIST dataset on neural networks with varying widths and depths, Dropout layers, L1 & L2 Regularization, or Maxout Networks.
